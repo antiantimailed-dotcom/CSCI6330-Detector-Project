@@ -15,7 +15,13 @@ from sklearn.metrics import (
 
 # Must match DROP_FROM_FEATURES in data_prep.py plus the label/bookkeeping
 # columns that aren't model inputs.
-NON_FEATURE_COLS = ["Label", "binary_label", "day", "Destination Port"]
+#
+# "Fwd Header Length.1" is not a real feature — CICIDS2017's source CSV
+# contains the column "Fwd Header Length" twice under the same name, and
+# pandas auto-renames the second occurrence to "Fwd Header Length.1" on
+# read. Both hold identical values, so we drop the duplicate and keep only
+# the first "Fwd Header Length".
+NON_FEATURE_COLS = ["Label", "binary_label", "day", "Destination Port", "Fwd Header Length.1"]
 
 
 def load_split(processed_dir: str = "data/processed", name: str = "train") -> pd.DataFrame:

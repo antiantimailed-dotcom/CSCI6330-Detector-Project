@@ -44,17 +44,29 @@ def dedupe(df: pd.DataFrame) -> pd.DataFrame:
 def _stratified_three_way_split(df: pd.DataFrame, strat_col: str,
                                  train_frac=0.7, val_frac=0.15):
     """Split a dataframe into train/val/test, preserving the proportion of
-    each value in strat_col in all three parts. test_frac = 1 - train - val."""
+    each value in strat_col in all three parts. test_frac = 1 - train - val.
+
+    Ordered by ROW POSITION within each strat_col group, not shuffled. This
+    file's source CSV is written out in roughly the order flows occurred, so
+    position is a proxy for time: train gets the earliest rows, val the next
+    slice, test the latest. This is NOT a full day-based split (that needs
+    more attack days than this pilot has — see build_pilot_splits), but it's
+    a meaningful step up from a random shuffle, which could otherwise place
+    two near-identical, millisecond-apart flows from the same burst into
+    both train and test and let the model effectively see its own test
+    data. Positional splitting keeps temporally-close flows together on one
+    side of the split instead."""
     train_parts, val_parts, test_parts = [], [], []
     for _, group in df.groupby(strat_col):
-        idx = RNG.permutation(len(group))
-        group = group.iloc[idx]
         n = len(group)
         n_train = int(n * train_frac)
         n_val = int(n * val_frac)
         train_parts.append(group.iloc[:n_train])
         val_parts.append(group.iloc[n_train:n_train + n_val])
         test_parts.append(group.iloc[n_train + n_val:])
+    # Shuffling the FINAL combined splits (across label groups) is fine —
+    # it only affects row order for training, not which split a row lands
+    # in, so it doesn't undo the positional logic above.
     return (pd.concat(train_parts).sample(frac=1, random_state=SEED).reset_index(drop=True),
             pd.concat(val_parts).sample(frac=1, random_state=SEED).reset_index(drop=True),
             pd.concat(test_parts).sample(frac=1, random_state=SEED).reset_index(drop=True))
@@ -75,8 +87,13 @@ def build_pilot_splits(monday: pd.DataFrame, wednesday: pd.DataFrame):
                 target false-positive rate) and to tune RF-IDS hyperparameters.
       - test:   touched exactly once, at the end, for the final comparison.
     This is a same-day split, not a cross-day split — a real limitation to
-    flag in your report. True day-based generalization (e.g. training only
-    on Wednesday's attacks and testing on Friday's) is milestone 2 work.
+    flag in your report. Within each day, rows are split by POSITION (a proxy
+    for capture time), not randomly, so near-duplicate back-to-back flows
+    from the same burst land on one side of the split rather than being
+    randomly scattered across train/val/test. True day-based generalization
+    (e.g. training only on Wednesday's attacks and testing on Friday's,
+    once more attack days exist) is milestone 2 work — this pilot only has
+    one attack day, so there's nothing yet to hold a day out against.
     """
     mon_train, mon_val, mon_test = _stratified_three_way_split(monday, "binary_label")
     wed_train, wed_val, wed_test = _stratified_three_way_split(wednesday, "Label")
