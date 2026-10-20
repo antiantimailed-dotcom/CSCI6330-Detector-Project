@@ -12,6 +12,7 @@ Requires: pip install torch scikit-learn
 """
 
 from pathlib import Path
+from datetime import datetime
 import json
 import numpy as np
 import torch
@@ -110,6 +111,15 @@ def save_artifacts(model: Autoencoder, scaler: StandardScaler, threshold: float,
     joblib.dump(scaler, models_dir / "autoencoder_scaler.joblib")
     with open(models_dir / "autoencoder_meta.json", "w") as f:
         json.dump({"threshold": threshold, "input_dim": scaler.n_features_in_}, f)
+
+    # A freshly trained/saved model hasn't been test-scored yet — clear any
+    # stale lock from a previous model version so score_test()'s one-time
+    # guard applies to THIS model, not whatever was there before.
+    lock_path = models_dir / "autoencoder_test_evaluated.json"
+    if lock_path.exists():
+        lock_path.unlink()
+        print("Cleared previous test-evaluation lock (new model saved, not yet test-scored).")
+
     print(f"Saved model, scaler, threshold to {models_dir}/")
 
 
@@ -159,9 +169,29 @@ def run_pilot(processed_dir: str = "data/processed", target_fpr: float = 0.01,
     return model, scaler, threshold, metrics
 
 
-def score_test(processed_dir: str = "data/processed", models_dir: Path = MODELS_DIR):
+def score_test(processed_dir: str = "data/processed", models_dir: Path = MODELS_DIR,
+                force: bool = False):
     """Run the FROZEN model/threshold on the test split. Call this only once,
-    for the final comparison — not during iteration/tuning."""
+    for the final comparison — not during iteration/tuning.
+
+    Refuses to run a second time against the same saved model (tracked by a
+    lock file next to the model artifacts) unless force=True, so a restart,
+    a re-run of "all cells", or forgetting it already ran can't quietly turn
+    test into a second validation set. Pass force=True only when you
+    deliberately intend a fresh, final re-evaluation (e.g. after genuinely
+    retraining the model) — not to brush past the warning."""
+    lock_path = Path(models_dir) / "autoencoder_test_evaluated.json"
+    if lock_path.exists() and not force:
+        prior = json.loads(lock_path.read_text())
+        raise RuntimeError(
+            f"Test set was already scored for this saved model at {prior['timestamp']} "
+            f"(metrics: {prior['metrics']}).\n"
+            "Scoring test again now would mean using test feedback to influence a model "
+            "you're still iterating on — exactly the leakage the instructor flagged.\n"
+            "If you have genuinely retrained/replaced the model since then and this is "
+            "an intentional final re-evaluation, call score_test(force=True)."
+        )
+
     model, scaler, threshold = load_artifacts(models_dir)
     test_df = load_split(processed_dir, "test")
     X_test, y_test = get_features_and_labels(test_df)
@@ -170,6 +200,15 @@ def score_test(processed_dir: str = "data/processed", models_dir: Path = MODELS_
     test_scores = reconstruction_error(model, X_test_scaled)
     metrics = evaluate_at_threshold(y_test.to_numpy(), test_scores, threshold)
     print_report("Baseline (autoencoder) — TEST (final)", metrics)
+
+    lock_path.write_text(json.dumps({
+        "timestamp": datetime.now().isoformat(timespec="seconds"),
+        "metrics": {k: (float(v) if isinstance(v, (int, float, np.floating)) else v)
+                    for k, v in metrics.items()},
+    }, indent=2))
+    print(f"\nRecorded this test run at {lock_path} — re-running score_test() will now "
+          f"refuse unless you pass force=True.")
+
     return metrics
 
 
