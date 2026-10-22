@@ -21,7 +21,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 from src.evaluate import (
     load_split, get_features_and_labels, pick_threshold_at_fpr,
-    evaluate_at_threshold, print_report,
+    evaluate_at_threshold, print_report, get_labels_aligned, per_attack_recall,
 )
 
 MODELS_DIR = Path("models")  # gitignored — regenerate locally, like the autoencoder's artifacts
@@ -98,6 +98,8 @@ def run_pilot(processed_dir: str = "data/processed", target_fpr: float = 0.01,
 
     metrics = evaluate_at_threshold(y_val.to_numpy(), val_scores, threshold)
     print_report("RF-IDS — val split (pilot checkpoint)", metrics)
+    print("\nPer-attack recall (val):")
+    print(per_attack_recall(get_labels_aligned(val_df), val_scores, threshold).to_string())
 
     save_artifacts(rf, threshold, models_dir)
     return rf, threshold, metrics
@@ -128,6 +130,8 @@ def score_test(processed_dir: str = "data/processed", models_dir: Path = MODELS_
     test_scores = attack_probability(rf, X_test.to_numpy())
     metrics = evaluate_at_threshold(y_test.to_numpy(), test_scores, threshold)
     print_report("RF-IDS — TEST (final)", metrics)
+    print("\nPer-attack recall (TEST, final):")
+    print(per_attack_recall(get_labels_aligned(test_df), test_scores, threshold).to_string())
 
     lock_path.write_text(json.dumps({
         "timestamp": datetime.now().isoformat(timespec="seconds"),
