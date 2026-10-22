@@ -60,7 +60,7 @@ def pick_threshold_at_fpr(benign_scores: np.ndarray, target_fpr: float = 0.01) -
     reconstruction error for the autoencoder, predicted attack probability
     for RF-IDS). Freeze the returned threshold and reuse it as-is on test.
     With the strict `>` comparison used in evaluate_at_threshold, realised FPR is
-    guaranteed to be <= target_fpr even when many scores tie at the cutoff.
+    at most target_fpr + 1/n (one benign row) even when many scores tie at the cutoff.
     """
     percentile = 100 * (1 - target_fpr)
     return float(np.percentile(benign_scores, percentile))
