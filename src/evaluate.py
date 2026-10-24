@@ -59,6 +59,8 @@ def pick_threshold_at_fpr(benign_scores: np.ndarray, target_fpr: float = 0.01) -
     Scores must be oriented so higher = more likely an attack (e.g.
     reconstruction error for the autoencoder, predicted attack probability
     for RF-IDS). Freeze the returned threshold and reuse it as-is on test.
+    With the strict `>` comparison used in evaluate_at_threshold, realised FPR is
+    at most target_fpr + 1/n (one benign row) even when many scores tie at the cutoff.
     """
     percentile = 100 * (1 - target_fpr)
     return float(np.percentile(benign_scores, percentile))
@@ -67,7 +69,7 @@ def pick_threshold_at_fpr(benign_scores: np.ndarray, target_fpr: float = 0.01) -
 def evaluate_at_threshold(y_true: np.ndarray, scores: np.ndarray, threshold: float) -> dict:
     """Core shared metric: given any model's scores and a frozen threshold,
     compute the same metric set every detector in this project is judged by."""
-    y_pred = (scores >= threshold).astype(int)
+    y_pred = (scores > threshold).astype(int)
     return _metrics_from_predictions(y_true, y_pred, threshold=threshold)
 
 
@@ -116,3 +118,41 @@ def compare_reports(reports: dict):
     for c in cols:
         row = f"{c:10s}" + "".join(f"{reports[n][c]:14.4f}" for n in names)
         print(row)
+
+
+def get_labels_aligned(df: pd.DataFrame) -> pd.Series:
+    """Fine-grained Label column with the SAME inf/NaN rows dropped as
+    get_features_and_labels, so it lines up with X and y row for row."""
+    feature_cols = [c for c in df.columns if c not in NON_FEATURE_COLS]
+    X = df[feature_cols].apply(pd.to_numeric, errors="coerce")
+    X = X.replace([np.inf, -np.inf], np.nan)
+    valid = X.notna().all(axis=1)
+    return df.loc[valid, "Label"].reset_index(drop=True)
+
+
+def per_attack_recall(labels: pd.Series, scores: np.ndarray, threshold: float) -> pd.DataFrame:
+    """Secondary analysis: for each attack type, the fraction flagged at the frozen
+    threshold (recall) and how many rows of that type were present. Shows WHICH
+    attacks a detector misses, not just how many."""
+    flagged = (scores > threshold).astype(int)
+    df = pd.DataFrame({"label": np.asarray(labels), "flagged": flagged})
+    df = df[df["label"] != "BENIGN"]
+    return df.groupby("label")["flagged"].agg(recall="mean", n="count")
+
+
+def context_only_baseline(train_df: pd.DataFrame, val_df: pd.DataFrame,
+                          target_fpr: float = 0.01, seed: int = 42) -> dict:
+    """Leakage check requested in instructor feedback: a Random Forest trained on
+    Destination Port ONLY, evaluated with the same matched-FPR rule. If this scores
+    well, the port field alone is doing the detector's work, which justifies
+    excluding it from the behavioural feature set. (MachineLearningCSV has no
+    Protocol column, so port is the only context field available.)"""
+    from sklearn.ensemble import RandomForestClassifier
+    Xtr = train_df[["Destination Port"]].to_numpy()
+    ytr = (train_df["binary_label"] == "ATTACK").astype(int).to_numpy()
+    Xva = val_df[["Destination Port"]].to_numpy()
+    yva = (val_df["binary_label"] == "ATTACK").astype(int).to_numpy()
+    rf = RandomForestClassifier(n_estimators=50, random_state=seed, n_jobs=-1).fit(Xtr, ytr)
+    scores = rf.predict_proba(Xva)[:, 1]
+    thr = pick_threshold_at_fpr(scores[yva == 0], target_fpr)
+    return evaluate_at_threshold(yva, scores, thr)

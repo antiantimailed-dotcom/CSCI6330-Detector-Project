@@ -15,7 +15,7 @@ Forest IDS (RF-IDS) on CICIDS2017, at a matched false-positive rate.
 
    (The other five days are needed for later milestones — see the project
    proposal. Not required yet.)
-4. Install dependencies: `pip install pandas numpy`
+4. Install dependencies: `pip install -r requirements.txt`
 5. Open `notebooks/Milestone1_Draft.ipynb` in PyCharm and run the cells
    top to bottom.
 
