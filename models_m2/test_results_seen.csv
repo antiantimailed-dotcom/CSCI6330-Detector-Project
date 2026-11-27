@@ -1,0 +1,97 @@
+detector,target_fpr,scope,item,n,value,split
+Autoencoder,,auroc,overall,230259,0.8456116648142097,test_seen
+Autoencoder,,auroc_day,Tuesday,63262,0.8946997529650217,test_seen
+Autoencoder,,auroc_day,Wednesday,91587,0.8472454131153053,test_seen
+Autoencoder,,auroc_family,DoS GoldenEye,1544,0.9825654978205656,test_seen
+Autoencoder,0.01,recall_rethresh,DoS GoldenEye,1544,0.6373056994818653,test_seen
+Autoencoder,0.001,recall_rethresh,DoS GoldenEye,1544,0.24417098445595856,test_seen
+Autoencoder,,auroc_family,DoS Hulk,25928,0.830608449376268,test_seen
+Autoencoder,0.01,recall_rethresh,DoS Hulk,25928,0.5314331996297439,test_seen
+Autoencoder,0.001,recall_rethresh,DoS Hulk,25928,0.5258407898796668,test_seen
+Autoencoder,,auroc_family,DoS Slowhttptest,785,0.9940147887090046,test_seen
+Autoencoder,0.01,recall_rethresh,DoS Slowhttptest,785,0.9643312101910828,test_seen
+Autoencoder,0.001,recall_rethresh,DoS Slowhttptest,785,0.07898089171974522,test_seen
+Autoencoder,,auroc_family,DoS slowloris,809,0.9792078472252896,test_seen
+Autoencoder,0.01,recall_rethresh,DoS slowloris,809,0.6440049443757726,test_seen
+Autoencoder,0.001,recall_rethresh,DoS slowloris,809,0.5067985166872683,test_seen
+Autoencoder,,auroc_family,FTP-Patator,890,0.9000870183760735,test_seen
+Autoencoder,0.01,recall_rethresh,FTP-Patator,890,0.0022471910112359553,test_seen
+Autoencoder,0.001,recall_rethresh,FTP-Patator,890,0.0,test_seen
+Autoencoder,,auroc_family,Heartbleed,3,0.9997174147178945,test_seen
+Autoencoder,0.01,recall_rethresh,Heartbleed,3,1.0,test_seen
+Autoencoder,0.001,recall_rethresh,Heartbleed,3,1.0,test_seen
+Autoencoder,,auroc_family,SSH-Patator,484,0.8847934178083362,test_seen
+Autoencoder,0.01,recall_rethresh,SSH-Patator,484,0.0,test_seen
+Autoencoder,0.001,recall_rethresh,SSH-Patator,484,0.0,test_seen
+Autoencoder,0.01,recall,ALL attacks,30443,0.5178201885490917,test_seen
+Autoencoder,0.01,fpr,ALL benign,199816,0.010254434079353005,test_seen
+Autoencoder,0.01,recall,DoS GoldenEye,1544,0.47150259067357514,test_seen
+Autoencoder,0.01,recall,DoS Hulk,25928,0.5311246528849121,test_seen
+Autoencoder,0.01,recall,DoS Slowhttptest,785,0.9643312101910828,test_seen
+Autoencoder,0.01,recall,DoS slowloris,809,0.6217552533992583,test_seen
+Autoencoder,0.01,recall,FTP-Patator,890,0.0022471910112359553,test_seen
+Autoencoder,0.01,recall,Heartbleed,3,1.0,test_seen
+Autoencoder,0.01,recall,SSH-Patator,484,0.0,test_seen
+Autoencoder,0.01,fpr,Monday,75410,0.0115899748044026,test_seen
+Autoencoder,0.01,fpr,Tuesday,61888,0.010696742502585316,test_seen
+Autoencoder,0.01,fpr,Wednesday,62518,0.008205636776608337,test_seen
+Autoencoder,0.001,recall,ALL attacks,30443,0.4559668889399862,test_seen
+Autoencoder,0.001,fpr,ALL benign,199816,0.0008007366777435241,test_seen
+Autoencoder,0.001,recall,DoS GoldenEye,1544,0.2104922279792746,test_seen
+Autoencoder,0.001,recall,DoS Hulk,25928,0.5067108917000925,test_seen
+Autoencoder,0.001,recall,DoS Slowhttptest,785,0.07006369426751592,test_seen
+Autoencoder,0.001,recall,DoS slowloris,809,0.44499381953028433,test_seen
+Autoencoder,0.001,recall,FTP-Patator,890,0.0,test_seen
+Autoencoder,0.001,recall,Heartbleed,3,1.0,test_seen
+Autoencoder,0.001,recall,SSH-Patator,484,0.0,test_seen
+Autoencoder,0.001,fpr,Monday,75410,0.0011669539848826415,test_seen
+Autoencoder,0.001,fpr,Tuesday,61888,0.0006301706308169596,test_seen
+Autoencoder,0.001,fpr,Wednesday,62518,0.0005278479797818229,test_seen
+RF-IDS,,auroc,overall,230259,0.9995570741953469,test_seen
+RF-IDS,,auroc_day,Tuesday,63262,0.9979440603789689,test_seen
+RF-IDS,,auroc_day,Wednesday,91587,0.9996020581209699,test_seen
+RF-IDS,,auroc_family,DoS GoldenEye,1544,0.9999109220275131,test_seen
+RF-IDS,0.01,recall_rethresh,DoS GoldenEye,1544,1.0,test_seen
+RF-IDS,0.001,recall_rethresh,DoS GoldenEye,1544,1.0,test_seen
+RF-IDS,,auroc_family,DoS Hulk,25928,0.9995979837226812,test_seen
+RF-IDS,0.01,recall_rethresh,DoS Hulk,25928,0.9994986115396483,test_seen
+RF-IDS,0.001,recall_rethresh,DoS Hulk,25928,0.9513653193458809,test_seen
+RF-IDS,,auroc_family,DoS Slowhttptest,785,0.9991278333496004,test_seen
+RF-IDS,0.01,recall_rethresh,DoS Slowhttptest,785,0.9987261146496815,test_seen
+RF-IDS,0.001,recall_rethresh,DoS Slowhttptest,785,0.9821656050955414,test_seen
+RF-IDS,,auroc_family,DoS slowloris,809,0.999603486260234,test_seen
+RF-IDS,0.01,recall_rethresh,DoS slowloris,809,0.9975278121137207,test_seen
+RF-IDS,0.001,recall_rethresh,DoS slowloris,809,0.9901112484548825,test_seen
+RF-IDS,,auroc_family,FTP-Patator,890,0.996967101861427,test_seen
+RF-IDS,0.01,recall_rethresh,FTP-Patator,890,0.9921348314606742,test_seen
+RF-IDS,0.001,recall_rethresh,FTP-Patator,890,0.9898876404494382,test_seen
+RF-IDS,,auroc_family,Heartbleed,3,0.9995574607846274,test_seen
+RF-IDS,0.01,recall_rethresh,Heartbleed,3,1.0,test_seen
+RF-IDS,0.001,recall_rethresh,Heartbleed,3,1.0,test_seen
+RF-IDS,,auroc_family,SSH-Patator,484,0.9997405336860188,test_seen
+RF-IDS,0.01,recall_rethresh,SSH-Patator,484,1.0,test_seen
+RF-IDS,0.001,recall_rethresh,SSH-Patator,484,0.9586776859504132,test_seen
+RF-IDS,0.01,recall,ALL attacks,30443,0.9989817035114805,test_seen
+RF-IDS,0.01,fpr,ALL benign,199816,0.008477799575609561,test_seen
+RF-IDS,0.01,recall,DoS GoldenEye,1544,1.0,test_seen
+RF-IDS,0.01,recall,DoS Hulk,25928,0.9991900647948164,test_seen
+RF-IDS,0.01,recall,DoS Slowhttptest,785,0.9987261146496815,test_seen
+RF-IDS,0.01,recall,DoS slowloris,809,0.9975278121137207,test_seen
+RF-IDS,0.01,recall,FTP-Patator,890,0.9921348314606742,test_seen
+RF-IDS,0.01,recall,Heartbleed,3,1.0,test_seen
+RF-IDS,0.01,recall,SSH-Patator,484,1.0,test_seen
+RF-IDS,0.01,fpr,Monday,75410,0.008646068160721389,test_seen
+RF-IDS,0.01,fpr,Tuesday,61888,0.008725439503619441,test_seen
+RF-IDS,0.01,fpr,Wednesday,62518,0.008029687450014396,test_seen
+RF-IDS,0.001,recall,ALL attacks,30443,0.956640278553362,test_seen
+RF-IDS,0.001,fpr,ALL benign,199816,0.0010359530768306842,test_seen
+RF-IDS,0.001,recall,DoS GoldenEye,1544,1.0,test_seen
+RF-IDS,0.001,recall,DoS Hulk,25928,0.9509024992286331,test_seen
+RF-IDS,0.001,recall,DoS Slowhttptest,785,0.9808917197452229,test_seen
+RF-IDS,0.001,recall,DoS slowloris,809,0.9888751545117429,test_seen
+RF-IDS,0.001,recall,FTP-Patator,890,0.9898876404494382,test_seen
+RF-IDS,0.001,recall,Heartbleed,3,1.0,test_seen
+RF-IDS,0.001,recall,SSH-Patator,484,0.9710743801652892,test_seen
+RF-IDS,0.001,fpr,Monday,75410,0.0008221721257127702,test_seen
+RF-IDS,0.001,fpr,Tuesday,61888,0.00140576525336091,test_seen
+RF-IDS,0.001,fpr,Wednesday,62518,0.0009277328129498704,test_seen

@@ -1,0 +1,111 @@
+detector,target_fpr,scope,item,n,value,split
+Autoencoder,,auroc,overall,1037872,0.9049910626364449,test_unseen
+Autoencoder,,auroc_day,Fri-AM-Bot,184044,0.7358884654022781,test_unseen
+Autoencoder,,auroc_day,Fri-PM-DDoS,223082,0.7967371863962088,test_unseen
+Autoencoder,,auroc_day,Fri-PM-PortScan,213777,0.9575847289652342,test_unseen
+Autoencoder,,auroc_day,Thu-AM-WebAttacks,164179,0.5548820620644759,test_unseen
+Autoencoder,,auroc_day,Thu-PM-Infiltration,252790,0.9294916093206129,test_unseen
+Autoencoder,,auroc_family,Bot,1948,0.7358884654022781,test_unseen
+Autoencoder,0.01,recall_rethresh,Bot,1948,0.022587268993839837,test_unseen
+Autoencoder,0.001,recall_rethresh,Bot,1948,0.014373716632443531,test_unseen
+Autoencoder,,auroc_family,DDoS,128014,0.7967371863962088,test_unseen
+Autoencoder,0.01,recall_rethresh,DDoS,128014,0.20603215273329478,test_unseen
+Autoencoder,0.001,recall_rethresh,DDoS,128014,0.09775493305419719,test_unseen
+Autoencoder,,auroc_family,Infiltration,36,0.9294916093206129,test_unseen
+Autoencoder,0.01,recall_rethresh,Infiltration,36,0.3333333333333333,test_unseen
+Autoencoder,0.001,recall_rethresh,Infiltration,36,0.3055555555555556,test_unseen
+Autoencoder,,auroc_family,PortScan,90694,0.9575847289652342,test_unseen
+Autoencoder,0.01,recall_rethresh,PortScan,90694,0.1567578891657662,test_unseen
+Autoencoder,0.001,recall_rethresh,PortScan,90694,0.0,test_unseen
+Autoencoder,,auroc_family,Web Attack - Brute Force,1470,0.5614989626895711,test_unseen
+Autoencoder,0.01,recall_rethresh,Web Attack - Brute Force,1470,0.0020408163265306124,test_unseen
+Autoencoder,0.001,recall_rethresh,Web Attack - Brute Force,1470,0.0,test_unseen
+Autoencoder,,auroc_family,Web Attack - Sql Injection,21,0.7279167239731559,test_unseen
+Autoencoder,0.01,recall_rethresh,Web Attack - Sql Injection,21,0.0,test_unseen
+Autoencoder,0.001,recall_rethresh,Web Attack - Sql Injection,21,0.0,test_unseen
+Autoencoder,,auroc_family,Web Attack - XSS,652,0.5343903874955002,test_unseen
+Autoencoder,0.01,recall_rethresh,Web Attack - XSS,652,0.024539877300613498,test_unseen
+Autoencoder,0.001,recall_rethresh,Web Attack - XSS,652,0.0,test_unseen
+Autoencoder,0.01,recall,ALL attacks,222835,0.4247447663069087,test_unseen
+Autoencoder,0.01,fpr,ALL benign,815037,0.045334138204768615,test_unseen
+Autoencoder,0.01,recall,Bot,1948,0.022587268993839837,test_unseen
+Autoencoder,0.01,recall,DDoS,128014,0.6275016795038043,test_unseen
+Autoencoder,0.01,recall,Infiltration,36,0.6111111111111112,test_unseen
+Autoencoder,0.01,recall,PortScan,90694,0.15695635874479016,test_unseen
+Autoencoder,0.01,recall,Web Attack - Brute Force,1470,0.0013605442176870747,test_unseen
+Autoencoder,0.01,recall,Web Attack - Sql Injection,21,0.0,test_unseen
+Autoencoder,0.01,recall,Web Attack - XSS,652,0.024539877300613498,test_unseen
+Autoencoder,0.01,fpr,Fri-AM-Bot,182096,0.011054608558123187,test_unseen
+Autoencoder,0.01,fpr,Fri-PM-DDoS,95068,0.24652880043758152,test_unseen
+Autoencoder,0.01,fpr,Fri-PM-PortScan,123083,0.010066377972587604,test_unseen
+Autoencoder,0.01,fpr,Thu-AM-WebAttacks,162036,0.008781999061936854,test_unseen
+Autoencoder,0.01,fpr,Thu-PM-Infiltration,252754,0.034962849252632995,test_unseen
+Autoencoder,0.001,recall,ALL attacks,222835,0.24117845042295868,test_unseen
+Autoencoder,0.001,fpr,ALL benign,815037,0.017916978002225664,test_unseen
+Autoencoder,0.001,recall,Bot,1948,0.017967145790554414,test_unseen
+Autoencoder,0.001,recall,DDoS,128014,0.41944631055978254,test_unseen
+Autoencoder,0.001,recall,Infiltration,36,0.3333333333333333,test_unseen
+Autoencoder,0.001,recall,PortScan,90694,1.1026087723553928e-05,test_unseen
+Autoencoder,0.001,recall,Web Attack - Brute Force,1470,0.0,test_unseen
+Autoencoder,0.001,recall,Web Attack - Sql Injection,21,0.0,test_unseen
+Autoencoder,0.001,recall,Web Attack - XSS,652,0.0,test_unseen
+Autoencoder,0.001,fpr,Fri-AM-Bot,182096,0.0016749406906247254,test_unseen
+Autoencoder,0.001,fpr,Fri-PM-DDoS,95068,0.14359195523204443,test_unseen
+Autoencoder,0.001,fpr,Fri-PM-PortScan,123083,0.0011699422341021912,test_unseen
+Autoencoder,0.001,fpr,Thu-AM-WebAttacks,162036,0.0013268656347972055,test_unseen
+Autoencoder,0.001,fpr,Thu-PM-Infiltration,252754,0.0011394478425662898,test_unseen
+RF-IDS,,auroc,overall,1037872,0.7577185211669503,test_unseen
+RF-IDS,,auroc_day,Fri-AM-Bot,184044,0.4912893146756355,test_unseen
+RF-IDS,,auroc_day,Fri-PM-DDoS,223082,0.8413205133660983,test_unseen
+RF-IDS,,auroc_day,Fri-PM-PortScan,213777,0.5919276120330119,test_unseen
+RF-IDS,,auroc_day,Thu-AM-WebAttacks,164179,0.9738662978599653,test_unseen
+RF-IDS,,auroc_day,Thu-PM-Infiltration,252790,0.923418675427051,test_unseen
+RF-IDS,,auroc_family,Bot,1948,0.4912893146756355,test_unseen
+RF-IDS,0.01,recall_rethresh,Bot,1948,0.0,test_unseen
+RF-IDS,0.001,recall_rethresh,Bot,1948,0.0,test_unseen
+RF-IDS,,auroc_family,DDoS,128014,0.8413205133660983,test_unseen
+RF-IDS,0.01,recall_rethresh,DDoS,128014,0.6357351539675348,test_unseen
+RF-IDS,0.001,recall_rethresh,DDoS,128014,0.6354851813082945,test_unseen
+RF-IDS,,auroc_family,Infiltration,36,0.923418675427051,test_unseen
+RF-IDS,0.01,recall_rethresh,Infiltration,36,0.25,test_unseen
+RF-IDS,0.001,recall_rethresh,Infiltration,36,0.0,test_unseen
+RF-IDS,,auroc_family,PortScan,90694,0.5919276120330119,test_unseen
+RF-IDS,0.01,recall_rethresh,PortScan,90694,0.025778993097669085,test_unseen
+RF-IDS,0.001,recall_rethresh,PortScan,90694,0.0017421218603215207,test_unseen
+RF-IDS,,auroc_family,Web Attack - Brute Force,1470,0.9702675167675009,test_unseen
+RF-IDS,0.01,recall_rethresh,Web Attack - Brute Force,1470,0.8979591836734694,test_unseen
+RF-IDS,0.001,recall_rethresh,Web Attack - Brute Force,1470,0.8231292517006803,test_unseen
+RF-IDS,,auroc_family,Web Attack - Sql Injection,21,0.9488373541917198,test_unseen
+RF-IDS,0.01,recall_rethresh,Web Attack - Sql Injection,21,0.8095238095238095,test_unseen
+RF-IDS,0.001,recall_rethresh,Web Attack - Sql Injection,21,0.2857142857142857,test_unseen
+RF-IDS,,auroc_family,Web Attack - XSS,652,0.9827862610853575,test_unseen
+RF-IDS,0.01,recall_rethresh,Web Attack - XSS,652,0.946319018404908,test_unseen
+RF-IDS,0.001,recall_rethresh,Web Attack - XSS,652,0.9248466257668712,test_unseen
+RF-IDS,0.01,recall,ALL attacks,222835,0.3881392061390715,test_unseen
+RF-IDS,0.01,fpr,ALL benign,815037,0.03683636448406637,test_unseen
+RF-IDS,0.01,recall,Bot,1948,0.0,test_unseen
+RF-IDS,0.01,recall,DDoS,128014,0.6490227631352821,test_unseen
+RF-IDS,0.01,recall,Infiltration,36,0.6944444444444444,test_unseen
+RF-IDS,0.01,recall,PortScan,90694,0.016296557655412706,test_unseen
+RF-IDS,0.01,recall,Web Attack - Brute Force,1470,0.8646258503401361,test_unseen
+RF-IDS,0.01,recall,Web Attack - Sql Injection,21,0.8095238095238095,test_unseen
+RF-IDS,0.01,recall,Web Attack - XSS,652,0.9447852760736196,test_unseen
+RF-IDS,0.01,fpr,Fri-AM-Bot,182096,0.005996836833318689,test_unseen
+RF-IDS,0.01,fpr,Fri-PM-DDoS,95068,0.17329700845710438,test_unseen
+RF-IDS,0.01,fpr,Fri-PM-PortScan,123083,0.006832787631110714,test_unseen
+RF-IDS,0.01,fpr,Thu-AM-WebAttacks,162036,0.006449184131921301,test_unseen
+RF-IDS,0.01,fpr,Thu-PM-Infiltration,252754,0.041819318388630844,test_unseen
+RF-IDS,0.001,recall,ALL attacks,222835,0.3741064015975946,test_unseen
+RF-IDS,0.001,fpr,ALL benign,815037,0.0011655912553663209,test_unseen
+RF-IDS,0.001,recall,Bot,1948,0.0,test_unseen
+RF-IDS,0.001,recall,DDoS,128014,0.6355789210555095,test_unseen
+RF-IDS,0.001,recall,Infiltration,36,0.027777777777777776,test_unseen
+RF-IDS,0.001,recall,PortScan,90694,0.001863408825280614,test_unseen
+RF-IDS,0.001,recall,Web Attack - Brute Force,1470,0.8258503401360544,test_unseen
+RF-IDS,0.001,recall,Web Attack - Sql Injection,21,0.47619047619047616,test_unseen
+RF-IDS,0.001,recall,Web Attack - XSS,652,0.9309815950920245,test_unseen
+RF-IDS,0.001,fpr,Fri-AM-Bot,182096,0.000961031543801072,test_unseen
+RF-IDS,0.001,fpr,Fri-PM-DDoS,95068,0.0012306980266756427,test_unseen
+RF-IDS,0.001,fpr,Fri-PM-PortScan,123083,0.0012430636237335782,test_unseen
+RF-IDS,0.001,fpr,Thu-AM-WebAttacks,162036,0.0011417215927324793,test_unseen
+RF-IDS,0.001,fpr,Thu-PM-Infiltration,252754,0.0012660531584069885,test_unseen
